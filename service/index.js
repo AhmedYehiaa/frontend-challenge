@@ -4,7 +4,7 @@ const swaggerDocument = require('./swagger.json');
 const bodyParser = require("body-parser");
 const path = require("path");
 
-const { generateFakeAdvisors, sort, filter } = require("./helpers");
+const { generateFakeAdvisors, sort, filter, paginate } = require("./helpers");
 const PORT = process.env.PORT || 8000;
 
 const app = express();
@@ -22,10 +22,21 @@ app.get("/", (req, res) => {
   return res.json({ status: 'UP' });
 });
 
-app.get("/advisors", (req, res) => {
+app.post("/advisors", (req, res) => {
+  // default values
+  const {
+    status = "any",
+    language = "any",
+    sortedBy = "numOfReviews",
+    sortType = "desc",
+    pageNumber = 1,
+    pageSize = 20 // number of items per page
+  } = req.body;
+
   let advisors = generateFakeAdvisors();
-  advisors = sort(advisors, "numOfReviews", "desc");
-  advisors = filter(advisors, { language: "english", status: "offline" });
+  advisors = sort(advisors, sortedBy, sortType);
+  advisors = filter(advisors, { language, status });
+  advisors = paginate(advisors, pageNumber, pageSize);
   res.json(advisors);
 });
 
