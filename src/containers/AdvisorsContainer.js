@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import styled from '@emotion/styled'
 
 
 import { BASE_URL } from '../config';
 import Advisors from '../components/Advisors';
 
-const TableWrapper = styled.div`
-  max-width: 75%;
-  margin: auto;
-
-`;
-
 class AdvisorContainer extends Component {
   state = {
     advisors: [],
-    loading: true,
+    loading: false,
     errorMessage: '',
   }
 
@@ -29,6 +22,7 @@ class AdvisorContainer extends Component {
 
   getAdvisors = async () => {
     try {
+      this.setState({ loading: true });
       const result = await axios.post(`${BASE_URL}/advisors`);
       const advisors = await this.delay(result, 2000);
       this.setState({
@@ -38,6 +32,7 @@ class AdvisorContainer extends Component {
     }
     catch (error) {
       this.setState({
+        loading: false,
         errorMessage: error
       })
     }
@@ -47,14 +42,18 @@ class AdvisorContainer extends Component {
     this.getAdvisors();
   }
 
+  handleFilterChanges = (pagination, filters, sorter, extra) => {
+    console.log(filters);
+    console.log(extra);
+  }
   render() {
-    const { advisors } = this.state;
+    const { advisors, loading } = this.state;
     return (
-      <TableWrapper>
-        <Advisors
-          advisors={advisors}
-        />
-      </TableWrapper>
+      <Advisors
+        advisors={advisors}
+        loading={loading}
+        onFilter={this.handleFilterChanges}
+      />
     );
   }
 }

@@ -1,15 +1,30 @@
 import React from 'react';
-import { Table } from 'antd';
+import { Table, BackTop, Tooltip } from 'antd';
+import styled from '@emotion/styled';
 
 import columns from './TableColumns';
 
-const Advisors = ({ advisors }) => {
+const TableWrapper = styled.div`
+  max-width: 75%;
+  margin: auto;
+`;
+
+const Advisors = ({ advisors, loading, onFilter }) => {
   return (
-    <Table
-      columns={columns}
-      dataSource={advisors}
-      rowKey="id"
-    />
+    <TableWrapper>
+      <Tooltip placement="topLeft" title="Back to top">
+        <BackTop />
+      </Tooltip>
+      <Table
+        columns={columns}
+        dataSource={advisors}
+        loading={loading}
+        onChange={onFilter}
+        rowKey="id"
+        pagination={false}
+
+      />
+    </TableWrapper>
   );
 }
 
