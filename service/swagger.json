@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "Dev Connector Application API",
-    "description": "Let's connect the developers",
+    "title": "Advisors Application API",
+    "description": "Let's connect people with people",
     "license": {
       "name": "MIT",
       "url": "https://opensource.org/licenses/MIT"
