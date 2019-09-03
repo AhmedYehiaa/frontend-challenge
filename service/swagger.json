@@ -28,11 +28,24 @@
   ],
   "paths": {
     "/advisors": {
-      "get": {
+      "post": {
         "tags": [
           "Advisors"
         ],
         "summary": "Generate fake advisors using faker.js",
+        "parameters": [
+          {
+            "name": "advisors",
+            "in": "body",
+            "description": "get advisors based on filter params",
+              "schema": {
+              "$ref": "#/definitions/Advisors_request"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -76,6 +89,28 @@
     "Advisors": {
       "type": "array",
       "$ref": "#/definitions/Advisor"
+    },
+    "Advisors_request": {
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "sortedBy": {
+          "type": "string"
+        },
+        "sortType": {
+          "type": "string"
+        },
+        "pageNumber": {
+          "type": "number"
+        },
+        "pageSize": {
+          "type": "number"
+        }
+      }
     }
   }
 }
