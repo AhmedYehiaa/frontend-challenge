@@ -36,8 +36,14 @@ const filter = (list = [], filterBy) => {
   return filteredList;
 };
 
+const paginate = (list, pageNumber, pageSize) => {
+  const offset = (pageNumber - 1) * pageSize;
+  return list.slice(offset, (pageNumber * pageSize));
+};
+
 module.exports = {
   generateFakeAdvisors,
   sort,
-  filter
+  filter,
+  paginate
 }
