@@ -1,0 +1,78 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Dev Connector Application API",
+    "description": "Let's connect the developers",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:8000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Advisots",
+      "description": "API for advisors in the system"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/advisors": {
+      "get": {
+        "tags": [
+          "Advisors"
+        ],
+        "summary": "Generate fake advisors using faker.js",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Advisors"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Advisor": {
+      "required": [],
+      "properties": {
+        "id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "numOfReviews": {
+          "type": "number"
+        }
+      }
+    },
+    "Advisors": {
+      "type": "array",
+      "$ref": "#/definitions/Advisor"
+    }
+  }
+}
