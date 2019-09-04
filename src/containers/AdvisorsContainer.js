@@ -1,45 +1,42 @@
-import React, { Component } from 'react';
-import axios from 'axios'
+import React, { Component } from "react";
+import axios from "axios";
 
-
-import { BASE_URL } from '../config';
-import Advisors from '../components/Advisors';
+import { BASE_URL } from "../config";
+import Advisors from "../components/Advisors";
 
 class AdvisorContainer extends Component {
   state = {
     advisors: [],
     loading: false,
-    errorMessage: '',
+    errorMessage: "",
     filters: {
       pageSize: 20,
       pageNumber: 1,
-      language: 'any',
-      status: 'any',
-      sortedBy: 'numOfReviews',
-      srotType: 'desc'
+      language: "any",
+      status: "any",
+      sortedBy: "numOfReviews",
+      srotType: "desc"
     }
-  }
+  };
 
   componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener("scroll", this.handleScroll);
     this.getAdvisors();
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener("scroll", this.handleScroll);
   }
 
   delay = (result, time) => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve(result.data)
+        resolve(result.data);
       }, time);
-    })
-  }
+    });
+  };
 
   getAdvisors = async () => {
-    let x;
-     
     const { filters } = this.state;
     try {
       this.setState({ loading: true });
@@ -47,46 +44,65 @@ class AdvisorContainer extends Component {
       const advisors = await this.delay(result, 2000);
       this.setState({
         loading: false,
-        advisors: filters.pageNumber > 1 ? [...this.state.advisors, ...advisors] : advisors
+        advisors:
+          filters.pageNumber > 1
+            ? [...this.state.advisors, ...advisors]
+            : advisors
       });
-    }
-    catch (error) {
+    } catch (error) {
       this.setState({
         loading: false,
         errorMessage: error
-      })
+      });
     }
   };
 
-
   handleFilterChanges = (pagination, filters, sorter) => {
-    const language = filters["language"] ? (filters["language"][0] || "any") : this.state.filters.language;
-    const status = filters["status"] ? (filters["status"][0] || "any") : this.state.filters.status;
-    const sortType = sorter["order"] ? (sorter["order"] === "descend" ? "desc" : "asc") : this.state.filters.srotType;
-    this.setState({
-      filters: {
-        ...this.state.filters,
-        pageNumber: 1,
-        language,
-        status,
-        sortType,
+    const language = filters["language"]
+      ? filters["language"][0] || "any"
+      : this.state.filters.language;
+    const status = filters["status"]
+      ? filters["status"][0] || "any"
+      : this.state.filters.status;
+    const sortType = sorter["order"]
+      ? sorter["order"] === "descend"
+        ? "desc"
+        : "asc"
+      : this.state.filters.srotType;
+    this.setState(
+      {
+        filters: {
+          ...this.state.filters,
+          pageNumber: 1,
+          language,
+          status,
+          sortType
+        }
+      },
+      () => {
+        this.getAdvisors();
       }
-    }, () => {
-      this.getAdvisors();
-    });
-  }
+    );
+  };
 
   handleScroll = () => {
-    if (document.documentElement.scrollTop + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+    if (
+      document.documentElement.scrollTop +
+        document.documentElement.clientHeight >=
+      document.documentElement.scrollHeight
+    ) {
       const { filters } = this.state;
-      this.setState({
-        filters: {
-          ...filters,
-          pageNumber: filters.pageNumber + 1
+      this.setState(
+        {
+          filters: {
+            ...filters,
+            pageNumber: filters.pageNumber + 1
+          }
+        },
+        () => {
+          this.getAdvisors();
         }
-      }, () => {
-        this.getAdvisors();
-      });
+      );
     }
   };
 
