@@ -52,14 +52,15 @@ class AdvisorContainer extends Component {
   }
 
   handleFilterChanges = (pagination, filters, sorter) => {
-    console.log("Filter: ", filters);
     const language = filters["language"] ? (filters["language"][0] || "any") : this.state.filters.language;
     const status = filters["status"] ? (filters["status"][0] || "any") : this.state.filters.status;
+    const sortType = sorter["order"] ? (sorter["order"] === "descend" ? "desc" : "asc") : this.state.filters.srotType;
     this.setState({
       filters: {
         ...this.state.filters,
         language,
         status,
+        sortType,
       }
     }, () => {
       this.getAdvisors();

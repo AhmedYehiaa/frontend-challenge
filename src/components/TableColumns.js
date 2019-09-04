@@ -38,6 +38,9 @@ const columns = [
     title: 'Reviews',
     dataIndex: 'numOfReviews',
     key: "numOfReviews",
+    defaultSortOrder: "desc",
+    sorter: () => {},
+
   },
 
 ];

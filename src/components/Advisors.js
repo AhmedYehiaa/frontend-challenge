@@ -22,7 +22,6 @@ const Advisors = ({ advisors, loading, onChange }) => {
         onChange={onChange}
         rowKey="id"
         pagination={false}
-
       />
     </TableWrapper>
   );
