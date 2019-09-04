@@ -9,7 +9,7 @@ const TableWrapper = styled.div`
   margin: auto;
 `;
 
-const Advisors = ({ advisors, loading, onFilter }) => {
+const Advisors = ({ advisors, loading, onChange }) => {
   return (
     <TableWrapper>
       <Tooltip placement="topLeft" title="Back to top">
@@ -19,7 +19,7 @@ const Advisors = ({ advisors, loading, onFilter }) => {
         columns={columns}
         dataSource={advisors}
         loading={loading}
-        onChange={onFilter}
+        onChange={onChange}
         rowKey="id"
         pagination={false}
 

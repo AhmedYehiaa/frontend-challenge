@@ -10,6 +10,14 @@ class AdvisorContainer extends Component {
     advisors: [],
     loading: false,
     errorMessage: '',
+    filters: {
+      pageSize: 20,
+      pageNumber: 1,
+      language: 'any',
+      status: 'any',
+      sortedBy: 'numOfReviews',
+      srotType: 'desc'
+    }
   }
 
   delay = (result, time) => {
@@ -21,9 +29,10 @@ class AdvisorContainer extends Component {
   }
 
   getAdvisors = async () => {
+    const { filters } = this.state;
     try {
       this.setState({ loading: true });
-      const result = await axios.post(`${BASE_URL}/advisors`);
+      const result = await axios.post(`${BASE_URL}/advisors`, filters);
       const advisors = await this.delay(result, 2000);
       this.setState({
         loading: false,
@@ -42,17 +51,28 @@ class AdvisorContainer extends Component {
     this.getAdvisors();
   }
 
-  handleFilterChanges = (pagination, filters, sorter, extra) => {
-    console.log(filters);
-    console.log(extra);
+  handleFilterChanges = (pagination, filters, sorter) => {
+    console.log("Filter: ", filters);
+    const language = filters["language"] ? (filters["language"][0] || "any") : this.state.filters.language;
+    const status = filters["status"] ? (filters["status"][0] || "any") : this.state.filters.status;
+    this.setState({
+      filters: {
+        ...this.state.filters,
+        language,
+        status,
+      }
+    }, () => {
+      this.getAdvisors();
+    });
   }
+
   render() {
     const { advisors, loading } = this.state;
     return (
       <Advisors
         advisors={advisors}
         loading={loading}
-        onFilter={this.handleFilterChanges}
+        onChange={this.handleFilterChanges}
       />
     );
   }
