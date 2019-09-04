@@ -2,7 +2,7 @@ import React from "react";
 import { Table, BackTop, Tooltip } from "antd";
 import styled from "@emotion/styled";
 
-import columns from "./TableColumns";
+import columns from "../TableColumns";
 
 const TableWrapper = styled.div`
   max-width: 75%;

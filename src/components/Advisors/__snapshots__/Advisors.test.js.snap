@@ -1,0 +1,123 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Advisors Component should render Advisors component 1`] = `
+<Styled(div)>
+  <Tooltip
+    arrowPointAtCenter={false}
+    autoAdjustOverflow={true}
+    mouseEnterDelay={0.1}
+    mouseLeaveDelay={0.1}
+    placement="topLeft"
+    title="Back to top"
+    transitionName="zoom-big-fast"
+  >
+    <BackTop
+      visibilityHeight={400}
+    />
+  </Tooltip>
+  <Table
+    bordered={false}
+    childrenColumnName="children"
+    className=""
+    columns={
+      Array [
+        Object {
+          "dataIndex": "name",
+          "key": "name",
+          "title": "Name",
+        },
+        Object {
+          "dataIndex": "avatar",
+          "key": "avatar",
+          "render": [Function],
+          "title": "Avatar",
+        },
+        Object {
+          "dataIndex": "email",
+          "key": "email",
+          "title": "Email",
+        },
+        Object {
+          "dataIndex": "language",
+          "filterMultiple": false,
+          "filters": Array [
+            Object {
+              "text": "English",
+              "value": "English",
+            },
+            Object {
+              "text": "Arabic",
+              "value": "Arabic",
+            },
+            Object {
+              "text": "German",
+              "value": "German",
+            },
+            Object {
+              "text": "Spanish",
+              "value": "Spanish",
+            },
+            Object {
+              "text": "Chinese",
+              "value": "Chinese",
+            },
+          ],
+          "key": "language",
+          "title": "Language",
+        },
+        Object {
+          "dataIndex": "status",
+          "filterMultiple": false,
+          "filters": Array [
+            Object {
+              "text": "Online",
+              "value": "Online",
+            },
+            Object {
+              "text": "Offline",
+              "value": "Offline",
+            },
+          ],
+          "key": "status",
+          "render": [Function],
+          "title": "Status",
+        },
+        Object {
+          "dataIndex": "numOfReviews",
+          "defaultSortOrder": "desc",
+          "key": "numOfReviews",
+          "sorter": [Function],
+          "title": "Reviews",
+        },
+      ]
+    }
+    dataSource={
+      Array [
+        Object {
+          "avatar": "image.png",
+          "email": "yehia@email.com",
+          "language": "english",
+          "name": "Yehia",
+          "numOfReviews": 50,
+          "status": "online",
+        },
+      ]
+    }
+    indentSize={20}
+    loading={false}
+    locale={Object {}}
+    onChange={[MockFunction]}
+    pagination={false}
+    rowKey="id"
+    showHeader={true}
+    size="default"
+    sortDirections={
+      Array [
+        "ascend",
+        "descend",
+      ]
+    }
+    useFixedHeader={false}
+  />
+</Styled(div)>
+`;

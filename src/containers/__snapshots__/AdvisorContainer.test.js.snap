@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdvisorsContainer Component should render advisorsContainer component 1`] = `
+<Advisors
+  advisors={Array []}
+  loading={true}
+  onChange={[Function]}
+/>
+`;

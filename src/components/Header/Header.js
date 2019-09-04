@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import logo from "../images/adviqo-logo.png";
+import logo from "../../images/adviqo-logo.png";
 
 const HeaderWrapper = styled.header`
   z-index: 1;

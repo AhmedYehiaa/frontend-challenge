@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import { BASE_URL } from "../config";
-import Advisors from "../components/Advisors";
+import Advisors from "../components/Advisors/Advisors";
 
 class AdvisorContainer extends Component {
   state = {
