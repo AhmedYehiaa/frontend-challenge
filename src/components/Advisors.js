@@ -7,6 +7,7 @@ import columns from "./TableColumns";
 const TableWrapper = styled.div`
   max-width: 75%;
   margin: auto;
+  padding-top: 30px;
 `;
 
 const Advisors = ({ advisors, loading, onChange }) => {
