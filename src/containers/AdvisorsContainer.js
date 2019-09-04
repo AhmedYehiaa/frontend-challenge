@@ -20,6 +20,15 @@ class AdvisorContainer extends Component {
     }
   }
 
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
+    this.getAdvisors();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
   delay = (result, time) => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -36,8 +45,8 @@ class AdvisorContainer extends Component {
       const advisors = await this.delay(result, 2000);
       this.setState({
         loading: false,
-        advisors
-      })
+        advisors: filters.pageNumber > 1 ? [...this.state.advisors, ...advisors] : advisors
+      });
     }
     catch (error) {
       this.setState({
@@ -47,9 +56,6 @@ class AdvisorContainer extends Component {
     }
   };
 
-  componentDidMount() {
-    this.getAdvisors();
-  }
 
   handleFilterChanges = (pagination, filters, sorter) => {
     const language = filters["language"] ? (filters["language"][0] || "any") : this.state.filters.language;
@@ -58,6 +64,7 @@ class AdvisorContainer extends Component {
     this.setState({
       filters: {
         ...this.state.filters,
+        pageNumber: 1,
         language,
         status,
         sortType,
@@ -66,6 +73,20 @@ class AdvisorContainer extends Component {
       this.getAdvisors();
     });
   }
+
+  handleScroll = () => {
+    if (document.documentElement.scrollTop + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+      const { filters } = this.state;
+      this.setState({
+        filters: {
+          ...filters,
+          pageNumber: filters.pageNumber + 1
+        }
+      }, () => {
+        this.getAdvisors();
+      });
+    }
+  };
 
   render() {
     const { advisors, loading } = this.state;
