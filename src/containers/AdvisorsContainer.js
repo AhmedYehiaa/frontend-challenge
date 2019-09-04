@@ -38,6 +38,8 @@ class AdvisorContainer extends Component {
   }
 
   getAdvisors = async () => {
+    let x;
+     
     const { filters } = this.state;
     try {
       this.setState({ loading: true });
