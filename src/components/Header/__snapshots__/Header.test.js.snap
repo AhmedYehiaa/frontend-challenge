@@ -6,6 +6,11 @@ exports[`Header Component should render header component 1`] = `
     <img
       alt="logo"
       src="adviqo-logo.png"
+      style={
+        Object {
+          "height": "50px",
+        }
+      }
     />
   </Styled(div)>
 </Styled(header)>

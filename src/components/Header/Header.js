@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <HeaderWrapper>
       <HeaderElement>
-        <img src={logo} alt="logo" />
+        <img src={logo} alt="logo" style={{ height: "50px" }} />
       </HeaderElement>
     </HeaderWrapper>
   );
